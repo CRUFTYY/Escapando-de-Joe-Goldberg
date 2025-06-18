@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Escapando de Joe Goldberg</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="contenedor" id="juego">
+  </div>
+
+  <script>
+    const escenas = {
+      inicio: {
+        titulo: "Él te está mirando",
+        texto: `Tu vida era tranquila, hasta que un día, mientras caminabas por la calle, sentiste una mirada en tu nuca.
+        <br><br>Joe te observa. Todavía no lo sabés, pero lo intuís. 
+        Hoy encontraste una caja en un falso fondo de tu armario. Dentro: tu entrada al recital de Artics Monkeys, una foto tuya dormida... y un mechón de tu pelo.
+        <br><br>Una nota, con la caligrafía digna de un enfermo, dice: <i>“No tengas miedo, yo te amo.”</i>`,
+        imagen: "https://miro.medium.com/v2/resize:fit:1400/1*wn_lYXxSDJDCbOQf45ncrQ.jpeg",
+        opciones: [
+          { texto: "Llamar a la policía", destino: "policia" },
+          { texto: "Escapar sin dejar rastro", destino: "huir" }
+        ]
+      },
+      policia: {
+        titulo: "Sistema roto",
+        texto: `Les contás todo. El oficial anota, asiente, sonríe forzado. Pero no hay cámaras, ni testigos, ni delito concreto. Solo intuiciones y miedo.
+        <br><br>Joe lo anticipó. Él siempre está un paso adelante. "Te vi ir a la comisaría", dice en un mensaje anónimo que llega horas después. 
+        <br><br>Tu celular desaparece. Tus redes publican solas. Él tiene acceso completo.`,
+        imagen: "https://st.depositphotos.com/1479672/2348/i/950/depositphotos_23483825-stock-photo-policeman-taking-notes.jpg",
+        opciones: [
+          { texto: "Te encerrás en tu casa", destino: "muerte" },
+          { texto: "Te vas del país esa noche", destino: "escape" }
+        ]
+      },
+      huir: {
+        titulo: "El silencio como única salida",
+        texto: `Agarrás tu mochila, dejás el celular en casa. Nada de despedidas. Nada de rastros. Tomás un micro al interior. Dormís con un ojo abierto.
+        <br><br>En una estación, un chico amable se te acerca. Dice que te vio preocupada. Dice que te puede ayudar. Su nombre... casualmente, es Will. 
+        <br><br>Joe también se llamó Will alguna vez.`,
+        imagen: "https://i.pinimg.com/736x/55/2e/5d/552e5d15bf95fec73c58f76e03aa337a.jpg",
+        opciones: [
+          { texto: "Confiás en el desconocido", destino: "muerte" },
+          { texto: "Seguís sola, sin hablar con nadie", destino: "escape" }
+        ]
+      },
+      muerte: {
+        titulo: "Demasiado tarde",
+        texto: `<i>“No fue mi culpa. Ella no entendía lo mucho que la amaba.”</i>
+        <br><br>Joe te encuentra. Siempre lo hace. Te observa dormida durante horas antes de acercarse.
+        <br><br>Y te dice: <i>“Ahora sí estamos juntos para siempre”</i>`,
+        imagen: "https://imgix.bustle.com/uploads/image/2019/12/13/9bd85365-5c97-4944-9242-46bbe1158966-screen-shot-2019-12-13-at-122347-pm.png?w=414&h=257&fit=crop&crop=faces&dpr=2",
+        opciones: [
+          { texto: "Volvé a intentar", destino: "inicio" }
+        ]
+      },
+      escape: {
+        titulo: "Perdiste, y te salvaste",
+        texto: `No hay certezas. Pero hay distancia. Conseguiste un trabajo en una librería en Australia. Vivís con otro nombre. Dormís mejor, pero nunca tranquila.
+        <br><br>Joe sigue buscando, en la sombra, como siempre. Pero esta vez... no te encuentra. No sos un personaje más. Esta vez, vos escribiste el final... O eso es lo que creés.`,
+        imagen: "https://www.shutterstock.com/image-photo/sydney-harbour-opera-house-cityscape-600nw-2495680553.jpg",
+        opciones: [
+          { texto: "Volver a jugar", destino: "inicio" }
+        ]
+      }
+    };
+
+    function cargarEscena(nombre) {
+      const escena = escenas[nombre];
+      const contenedor = document.getElementById("juego");
+      contenedor.innerHTML = `
+        <h1>${escena.titulo}</h1>
+        <p>${escena.texto}</p>
+        <img src="${escena.imagen}" class="imagen" alt="escena"/>
+        <div class="opciones">
+          ${escena.opciones.map(op => `<a href="#" class="boton" onclick="cargarEscena('${op.destino}')">${op.texto}</a>`).join("")}
+        </div>
+      `;
+    }
+
+    cargarEscena("inicio");
+  </script>
+</body>
+</html>
